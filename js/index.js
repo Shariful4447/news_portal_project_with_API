@@ -26,6 +26,8 @@ const handleLoadNews = async (categoryId) => {
     
 
     const cardContainer = document.getElementById('card-container');
+    // if i want to show card which are now clicked not with the previous one
+    cardContainer.innerHTML = "";
 
     data.data.forEach((news) =>{
         console.log(news);
@@ -37,6 +39,9 @@ const handleLoadNews = async (categoryId) => {
           <h2 class="card-title">${news.title}</h2>
           <div class="badge badge-secondary p-5">${news?.rating?.badge}</div>
           <p>${news.details.slice(0,100)}</p>
+            
+          <p>Total Views : ${news.total_view ? news.total_view : 'no views'}</p>
+
           <div class="card-footer flex justify-between mt-8">
                     <div class="flex">
                         <div>
@@ -77,3 +82,4 @@ const handleLoadNews = async (categoryId) => {
 
 
 handleCategory();
+handleLoadNews("01");
