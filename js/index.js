@@ -24,7 +24,7 @@ const handleLoadNews = async (categoryId) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`);
     const data = await response.json();
     
-
+// data by category which clicked by id
     const cardContainer = document.getElementById('card-container');
     // if i want to show card which are now clicked not with the previous one
     cardContainer.innerHTML = "";
@@ -33,7 +33,7 @@ const handleLoadNews = async (categoryId) => {
         console.log(news);
         const div = document.createElement('div');
         div.innerHTML = `
-        <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card w-72 bg-base-100 shadow-xl">
         <figure><img src="${news?.image_url}" alt="Shoes" /></figure>
         <div class="card-body">
           <h2 class="card-title">${news.title}</h2>
@@ -61,7 +61,7 @@ const handleLoadNews = async (categoryId) => {
 
                   </div>
           <div class="card-actions justify-center">
-            <button class="btn btn-primary">See More..</button>
+            <button onclick="handleModal('${news._id}')"  class="btn btn-primary">See More..</button>
           </div>
         </div>
       </div>
@@ -73,8 +73,37 @@ const handleLoadNews = async (categoryId) => {
     
 } 
 
-// data by category which clicked by id
+// modal open when clicked show details
 
+const handleModal = async(newsID) => {
+    console.log(newsID);
+
+    const response = await fetch(`https://openapi.programming-hero.com/api/news/${newsID}`)
+    data = await response.json();
+    console.log(data.data);
+
+
+    const modalContainer = document.getElementById('modal-container');
+
+
+    const div = document.createElement('div');
+    div.innerHTML =`
+    
+        
+        <dialog id="my_modal" class="modal">
+        <form method="dialog" class="modal-box">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            <h3 class="font-bold text-lg">Hello!</h3>
+            <p class="py-4">Press ESC key or click on ✕ button to close</p>
+        </form>
+        </dialog>
+    `;
+
+    modalContainer.appendChild(div);
+
+    const modal = document.getElementById('my_modal');
+    modal.showModal();
+}
 
 
 
