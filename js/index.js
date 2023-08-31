@@ -32,12 +32,30 @@ const handleLoadNews = async (categoryId) => {
         const div = document.createElement('div');
         div.innerHTML = `
         <div class="card w-96 bg-base-100 shadow-xl">
-        <figure><img src="${news.image_url}" alt="Shoes" /></figure>
+        <figure><img src="${news?.image_url}" alt="Shoes" /></figure>
         <div class="card-body">
           <h2 class="card-title">${news.title}</h2>
-          <p>${news.details}</p>
-          <p>${news.author.name}</p>
-          <div class="card-actions justify-end">
+          <div class="badge badge-secondary p-5">${news?.rating?.badge}</div>
+          <p>${news.details.slice(0,100)}</p>
+          <div class="card-footer flex justify-between mt-8">
+                    <div class="flex">
+                        <div>
+                            <div class="avatar online">
+                                <div class="w-24 rounded-full">
+                                  <img src="${news?.author.img}" />
+                                </div>
+                              </div>
+                        </div>
+                        <div class="m-2" >
+                            <p>${news.author.name}</p>
+                            <p>${news.author.published_date}</p>
+                            
+                        </div>
+
+                    </div>
+
+                  </div>
+          <div class="card-actions justify-center">
             <button class="btn btn-primary">See More..</button>
           </div>
         </div>
